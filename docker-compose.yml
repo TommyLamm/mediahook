@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    image: mediahook:latest
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/data
+    expose:
+      - "8000"
+
+  # 如果 VPS 上已經有 Nginx / Caddy / Traefik 佔用 80、443，
+  # 把這個服務刪掉，改用現有的反向代理指到 app:8000（見 docs/deploy.md）
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  caddy_data:
+  caddy_config:

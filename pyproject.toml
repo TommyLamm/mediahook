@@ -1,0 +1,9 @@
+[project]
+name = "mediahook"
+version = "0.1.0"
+description = "給 iPhone 捷徑用的社群媒體下載服務"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

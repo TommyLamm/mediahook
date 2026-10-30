@@ -1,0 +1,7 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+pillow>=11
+requests[socks]>=2.32
+# 下載工具不鎖版本：平台改版很頻繁，每次建置都要拿最新版
+yt-dlp[default,curl-cffi]
+gallery-dl
